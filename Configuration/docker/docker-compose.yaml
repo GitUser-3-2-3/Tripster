@@ -1,0 +1,22 @@
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: Qwerty1,0*
+    ports:
+      - "3306:3306"
+    networks:
+      - tripster
+    volumes:
+      - mysql:/var/lib/mysql
+    restart: unless-stopped
+
+networks:
+  tripster:
+    driver: bridge
+
+volumes:
+  mysql:
+    driver: local
