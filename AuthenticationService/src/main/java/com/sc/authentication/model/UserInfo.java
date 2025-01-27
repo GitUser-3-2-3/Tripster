@@ -3,6 +3,7 @@ package com.sc.authentication.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,16 +14,17 @@ import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Builder
-@Data
 @Entity
 @Table(name = "user_info")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "user_id")
     private String userId;
 
     @NotEmpty(message = "Username cannot be blank.")
@@ -35,6 +37,7 @@ public class UserInfo {
     @Column(unique = true)
     private String userEmail;
 
+    @Size(max = 10, message = "Phone Number cannot exceed 10 digits.")
     @Column(unique = true)
     private Long phoneNumber;
 
