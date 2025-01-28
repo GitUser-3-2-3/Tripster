@@ -13,16 +13,14 @@ public class DataLoader {
     CommandLineRunner loadRolesInDatabase(RoleRepository roleRepository) {
         return args -> {
             if (roleRepository.existsByRoleName("ROLE_ADMIN")) {
-                Roles adminRole = Roles.builder().roleName("ROLE_ADMIN")
-                    .description("Administrator access")
-                    .build();
-                roleRepository.save(adminRole);
+                roleRepository.save(Roles.builder().roleName("ROLE_ADMIN")
+                    .description("Administrator access").build()
+                );
             }
             if (roleRepository.existsByRoleName("ROLE_USER")) {
-                Roles userRole = Roles.builder().roleName("ROLE_USER")
-                    .description("Administrator access")
-                    .build();
-                roleRepository.save(userRole);
+                roleRepository.save(Roles.builder().roleName("ROLE_USER")
+                    .description("Administrator access").build()
+                );
             }
         };
     }
