@@ -21,11 +21,11 @@ public class CustomUserDetails implements UserDetails {
         this.username = userInfo.getUsername();
         this.password = userInfo.getPassword();
 
-        List<GrantedAuthority> authorities = new ArrayList<>();
+        List<GrantedAuthority> authorityList = new ArrayList<>();
         for (Roles role : userInfo.getUserRoles()) {
-            authorities.add(new SimpleGrantedAuthority(role.getRoleName().toUpperCase()));
+            authorityList.add(new SimpleGrantedAuthority(role.getRoleName().toUpperCase()));
         }
-        this.grantedAuthorities = authorities;
+        this.grantedAuthorities = authorityList;
     }
 
     @Override

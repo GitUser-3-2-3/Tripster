@@ -28,13 +28,14 @@ public class UserInfo {
     private String userId;
 
     @NotEmpty(message = "Username cannot be blank.")
+    @Column(unique = true, nullable = false)
     private String username;
 
     @NotEmpty(message = "Password cannot be blank.")
     private String password;
 
     @Email(message = "Invalid Email.")
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String userEmail;
 
     @Size(max = 10, message = "Phone Number cannot exceed 10 digits.")
