@@ -28,7 +28,6 @@ public class UserInfo {
     private String userId;
 
     @NotEmpty(message = "Username cannot be blank.")
-    @Column(unique = true, nullable = false)
     private String username;
 
     @NotEmpty(message = "Password cannot be blank.")
