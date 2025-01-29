@@ -2,6 +2,7 @@ package com.sc.authentication.security;
 
 import com.sc.authentication.model.Roles;
 import com.sc.authentication.model.UserInfo;
+import lombok.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,8 +18,8 @@ public class CustomUserDetails implements UserDetails {
     private final String username;
     private final String password;
 
-    public CustomUserDetails(UserInfo userInfo) {
-        this.username = userInfo.getUsername();
+    public CustomUserDetails(@NonNull UserInfo userInfo) {
+        this.username = userInfo.getUserEmail(); // sets userEmail as the default username for security config.
         this.password = userInfo.getPassword();
 
         List<GrantedAuthority> authorityList = new ArrayList<>();
