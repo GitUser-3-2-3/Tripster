@@ -1,7 +1,7 @@
 server:
   port: 8085
   servlet:
-    context-path: /verify/v1
+    context-path: /v1/verify
 
 spring:
   application:

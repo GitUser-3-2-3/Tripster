@@ -57,6 +57,11 @@ public class JwtService {
         return getClaims(jwtToken, Claims::getExpiration);
     }
 
+    public Boolean validateToken(String jwtToken, UserDetails userDetails) {
+        final String username = getClaims(jwtToken, Claims::getSubject);
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
+    }
+
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return buildToken(extraClaims, userDetails);
     }
