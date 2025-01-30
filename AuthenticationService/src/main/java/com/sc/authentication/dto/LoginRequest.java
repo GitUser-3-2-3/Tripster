@@ -12,16 +12,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegistrationRequest {
-
-    @NotEmpty(message = "Username cannot be blank.")
-    private String username;
-
-    @NotEmpty(message = "Password cannot be blank.")
-    private String password;
+public class LoginRequest {
 
     @Email(message = "Invalid Email.")
     private String userEmail;
+
+    @NotEmpty(message = "Password cannot be blank.")
+    private String password;
 
     @Size(max = 10, message = "Phone Number cannot exceed 10 digits.")
     private Long phoneNumber;

@@ -67,10 +67,6 @@ public class JwtService {
         return buildToken(extraClaims, userDetails);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
-    }
-
     private static SecretKey getSignInKey() {
         byte[] keyByte = Decoders.BASE64URL.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyByte);

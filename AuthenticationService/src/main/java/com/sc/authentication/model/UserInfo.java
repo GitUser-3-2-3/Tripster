@@ -1,15 +1,13 @@
 package com.sc.authentication.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -20,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 public class UserInfo {
 
     @Id
@@ -27,17 +26,15 @@ public class UserInfo {
     @Column(name = "user_id")
     private String userId;
 
-    @NotEmpty(message = "Username cannot be blank.")
+    @Column(nullable = false)
     private String username;
 
-    @NotEmpty(message = "Password cannot be blank.")
+    @Column(nullable = false)
     private String password;
 
-    @Email(message = "Invalid Email.")
     @Column(unique = true, nullable = false)
     private String userEmail;
 
-    @Size(max = 10, message = "Phone Number cannot exceed 10 digits.")
     @Column(unique = true)
     private Long phoneNumber;
 
