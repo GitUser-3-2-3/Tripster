@@ -8,11 +8,14 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.UUID;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class RefreshTokenService {
@@ -37,10 +40,13 @@ public class RefreshTokenService {
         return refreshTokenRepository.save(refreshToken);
     }
 
-    public Boolean validateRefreshToken(@NonNull RefreshToken refreshToken) throws RuntimeException {
-        if (refreshToken.getExpiresAt().isBefore(Instant.now())) {
+    public Boolean validateRefreshToken(@NonNull String refreshToken) throws RuntimeException {
+        RefreshToken refreshTokenObj = findByRefreshToken(refreshToken)
+            .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Refresh token not found"));
+
+        if (refreshTokenObj.getExpiresAt().isBefore(Instant.now())) {
             throw new RuntimeException(
-                "Expired Token, login again to get new Token." + refreshToken.getRefreshToken());
+                "Expired Token, login again to get new Token." + refreshTokenObj.getRefreshToken());
         }
         return Boolean.TRUE;
     }
