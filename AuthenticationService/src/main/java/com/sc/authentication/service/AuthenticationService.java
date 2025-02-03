@@ -68,7 +68,7 @@ public class AuthenticationService {
         var userDetails = (CustomUserDetails) authentication.getPrincipal();
         log.info("USER_DETAILS::{}", userDetails);
 
-        extraClaims.put("username", userDetails.getUsername());
+        extraClaims.put("username", request.getUsername());
         var jwtToken = jwtService.generateToken(extraClaims, userDetails);
         var refreshToken = refreshTokenService.createRefreshToken(userDetails.getUsername());
 
