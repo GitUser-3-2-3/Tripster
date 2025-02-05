@@ -36,6 +36,7 @@ public class RefreshTokenService {
         RefreshToken refreshToken = RefreshToken.builder()
             .refreshToken(UUID.randomUUID().toString())
             .expiresAt(Instant.now().plus(3, ChronoUnit.MONTHS))
+            .userInfo(userInfo)
             .build();
         return refreshTokenRepository.save(refreshToken);
     }
